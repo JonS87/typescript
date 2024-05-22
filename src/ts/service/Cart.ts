@@ -12,18 +12,13 @@ export default class Cart {
     }
 
     ttlCost(): number {
-        let sum = 0
-        for (let i:number = 0; i < this._items.length; i++) {
-            sum += this._items[i].price;
-        }
-        return sum;
+        return this._items.reduce(function(currentSum, currentItem) {
+            return currentSum + currentItem.price;
+        }, 0)
     }
 
     ttlCostSale(sale: number): number {
-        let sum = 0
-        for (let i:number = 0; i < this._items.length; i++) {
-            sum += this._items[i].price;
-        }
+        let sum = this.ttlCost();
         return sum * (1 - sale / 100);
     }
 
